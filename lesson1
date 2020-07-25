@@ -1,0 +1,18 @@
+import config
+import telebot
+
+bot = telebot.TeleBot('1394623984:AAHcxYOji1FL5nNw0jiMXzDUFWBfzRa9Kqs')
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    print(message.chat.id)
+    print(message.from_user)
+    bot.send_message(68164096, 'test');
+    bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
+
+@bot.message_handler(content_types=['text'])
+def repeat_all_messages(message):
+    bot.send_message(message.chat.id, message.text)
+
+if __name__ == '__main__':
+    bot.infinity_polling()
